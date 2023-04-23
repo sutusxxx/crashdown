@@ -1,6 +1,12 @@
 let game;
 let blockBar;
 
+let music;
+let clickSound;
+let bigClickSound;
+let powerUpSound;
+let gameOverSound;
+
 let blockProgress;
 let time;
 
@@ -32,12 +38,26 @@ function createGame() {
     $('<div id="start"><span>Press any key to start...</span></div>').appendTo(game);
 
     blockBar = $('#blockBar');
+    initSounds();
+}
+
+function initSounds() {
+    music = $('#backgroundMusic')[0];
+    clickSound = $('#clickSound')[0];
+    bigClickSound = $('#powerUpSound')[0];
+    powerUpSound = $('#powerUpGetSound')[0];
+    gameOverSound = $('#gameOverSound')[0];
+    music.addEventListener('ended', function () {
+        music.pause();
+        music.currentTime = 0;
+        music.play();
+    });
 }
 
 function startGame() {
     removeGameStartEventListeners();
     $('#start').remove();
-
+    music.play();
     time = setInterval(setTimer, 1000);
     blockProgress = setInterval(addBlock, gameSpeed);
     $(document).on('click', '.block', function (e) {
@@ -45,12 +65,15 @@ function startGame() {
         let removedBlocks;
         if (e.shiftKey && powerUps > 0) {
             removedBlocks = removeAllByColor(selectedBlock);
+            bigClickSound.currentTime = 0;
+            bigClickSound.play();
             removePowerUp();
             addScoreWithPowerUp(removedBlocks);
         } else {
             removedBlocks = removeBlocks(selectedBlock);
-
             if (removedBlocks) {
+                clickSound.currentTime = 0;
+                clickSound.play();
                 addScore(removedBlocks);
             }
         }
@@ -77,6 +100,9 @@ function gameOver() {
         highScore = score;
         localStorage.setItem('highScore', highScore);
     }
+    music.pause();
+    music.currentTime = 0;
+    gameOverSound.play();
     addRestartGameEventListeners();
 }
 
@@ -92,6 +118,7 @@ function clearGame() {
 }
 
 function addPowerUp() {
+    powerUpSound.play();
     powerUps++;
     $('#powerUp').text(powerUps);
 }
