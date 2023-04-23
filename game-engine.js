@@ -40,9 +40,21 @@ function startGame() {
 
     time = setInterval(setTimer, 1000);
     blockProgress = setInterval(addBlock, gameSpeed);
-    $(document).on('click', '.block', function () {
+    $(document).on('click', '.block', function (e) {
         const selectedBlock = $(this);
-        removeBlocks(selectedBlock);
+        let removedBlocks;
+        if (e.shiftKey && powerUps > 0) {
+            removedBlocks = removeAllByColor(selectedBlock);
+            removePowerUp();
+            addScoreWithPowerUp(removedBlocks);
+        } else {
+            removedBlocks = removeBlocks(selectedBlock);
+
+            if (removedBlocks) {
+                addScore(removedBlocks);
+            }
+        }
+
         alignBlocksVertically();
         alignBlocksHorizontally();
     });
@@ -81,10 +93,16 @@ function clearGame() {
 
 function addPowerUp() {
     powerUps++;
+    $('#powerUp').text(powerUps);
+}
+
+function removePowerUp() {
+    powerUps--;
+    $('#powerUp').text(powerUps);
 }
 
 function addScore(removedBlocks) {
-    let points = 0;
+    let points;
 
     if (removedBlocks < 5) points = 5;
     else if (removedBlocks >= 5 && removedBlocks < 10) points = removedBlocks;
@@ -98,6 +116,11 @@ function addScore(removedBlocks) {
     }
 
     score += points;
+    setScore();
+}
+
+function addScoreWithPowerUp(removedBlocks) {
+    score += removedBlocks;
     setScore();
 }
 
@@ -135,7 +158,11 @@ function setTime() {
 }
 
 function increaseDifficulty() {
-    gameSpeed -= 2;
+    if (gameSpeed > 100) {
+        gameSpeed -= 2;
+    } else if (gameSpeed > 50) {
+        gameSpeed -= 1;
+    }
     clearInterval(blockProgress);
     blockProgress = setInterval(addBlock, gameSpeed);
 }

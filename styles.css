@@ -106,6 +106,32 @@ body {
     padding-left: 10px;
 }
 
+.powerup {
+    position: absolute;
+    height: 50px;
+    width: 150px;
+    top: 50%;
+    left: 67%;
+}
+
+.powerup span {
+    color: #fff;
+    padding-left: 10px;
+}
+
+.help {
+    position: absolute;
+    height: 50px;
+    width: 150px;
+    top: 70%;
+    left: 67%;
+}
+
+.help span {
+    color: #fff;
+    padding-left: 10px;
+}
+
 .block {
     position: absolute;
     border: solid black 1px;

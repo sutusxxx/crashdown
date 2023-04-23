@@ -79,6 +79,21 @@ function addBlock() {
     }
 }
 
+function removeAllByColor(selectedBlock) {
+    const selectedColor = selectedBlock.attr('class').split(' ')[1];
+    let removedBlocks = 0;
+    game.children().each(function () {
+        const block = $(this);
+        const color = block.attr('class').split(' ')[1];
+
+        if (selectedColor === color) {
+            block.remove();
+            removedBlocks++;
+        }
+    });
+    return removedBlocks;
+}
+
 function removeBlocks(selectedBlock) {
     const color = selectedBlock.attr('class').split(' ')[1];
     const blocksToRemove = [];
@@ -86,7 +101,7 @@ function removeBlocks(selectedBlock) {
     if (blocksToRemove.length < 3) return;
 
     blocksToRemove.forEach(block => block.remove());
-    addScore(blocksToRemove.length);
+    return blocksToRemove.length;
 }
 
 function hasBlock(array, block) {
