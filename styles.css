@@ -1,0 +1,124 @@
+body {
+    background: black;
+}
+
+.container {
+    position: absolute;
+    background: #000;
+    margin: auto;
+    height: 700px;
+    width: 700px;
+    border: black solid 1px;
+}
+
+#start {
+    position: absolute;
+    cursor: pointer;
+    z-index: 1;
+    top: 40%;
+    left: 70%;
+    width: 400px;
+    transform: translate(-50%, -50%);
+}
+
+#start span {
+    font-family: Arial, serif;
+    position: absolute;
+    font-size: x-large;
+    color: #ffffff;
+    text-shadow: 2px 2px black;
+}
+
+#restart {
+    position: absolute;
+    cursor: pointer;
+    z-index: 1;
+    top: 40%;
+    left: 60%;
+    width: 500px;
+    transform: translate(-50%, -50%);
+}
+
+#restart span {
+    font-family: Arial, serif;
+    position: absolute;
+    font-size: x-large;
+    color: #ffffff;
+    text-shadow: 3px 3px black;
+}
+
+
+#game {
+    position: relative;
+    border: solid #00ff63 1px;
+    width: 450px;
+    height: 600px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+#blockBar {
+    position: fixed;
+    display: block;
+    border: solid #00ff63 1px;
+    width: 450px;
+    height: 30px;
+    top: 650px;
+    margin-left: 10px;
+}
+
+.timer {
+    position: absolute;
+    height: 50px;
+    width: 150px;
+    top: 10%;
+    left: 67%;
+}
+
+.timer span {
+    color: #fff;
+    padding-left: 10px;
+}
+
+.score {
+    position: absolute;
+    height: 50px;
+    width: 150px;
+    top: 20%;
+    left: 67%;
+}
+
+.score span {
+    color: #fff;
+    padding-left: 10px;
+}
+
+.highScore {
+    position: absolute;
+    height: 50px;
+    width: 150px;
+    top: 30%;
+    left: 67%;
+}
+
+.highScore span {
+    color: #fff;
+    padding-left: 10px;
+}
+
+.block {
+    position: absolute;
+    border: solid black 1px;
+}
+
+.red {
+    background: red;
+}
+
+.green {
+    background: green;
+}
+
+.blue {
+    background: blue;
+}
